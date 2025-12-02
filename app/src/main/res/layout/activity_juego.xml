@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridTablero"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:rowCount="3"
+    android:padding="24dp"
+    android:alignmentMode="alignMargins"
+    android:rowOrderPreserved="false">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Casillas del tablero (solo visual) -->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="#DDDDDD"
+        android:text=""
+        android:gravity="center"
+        android:layout_margin="4dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="#DDDDDD"
+        android:text=""
+        android:gravity="center"
+        android:layout_margin="4dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_row="0"
+        android:layout_column="2"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="#DDDDDD"
+        android:text=""
+        android:gravity="center"
+        android:layout_margin="4dp"/>
+
+    <!-- Repetir similar para filas 1 y 2 -->
+    <!-- Esto crea un tablero 3x3 visual, sin funcionalidad -->
+</GridLayout>
