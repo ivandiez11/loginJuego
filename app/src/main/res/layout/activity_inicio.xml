@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="#F08080"> <!-- Fondo suave -->
 
     <!-- Mensaje de bienvenida -->
     <TextView
@@ -12,22 +13,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bienvenido !"
-        android:textSize="24sp"
-        android:layout_marginBottom="32dp"/>
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="40dp"/>
 
     <!-- Botón Iniciar Sesión / Cerrar Sesión -->
     <Button
         android:id="@+id/btnSesion"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
-        android:layout_marginBottom="16dp"/>
+        android:backgroundTint="#FF9800"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp"
+        android:elevation="4dp"/>
 
     <!-- Botón Jugar Ahora -->
     <Button
         android:id="@+id/btnJugar"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Jugar Ahora"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:elevation="4dp"
         android:enabled="false"/>
 </LinearLayout>
