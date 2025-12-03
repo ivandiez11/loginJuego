@@ -48,11 +48,11 @@ class Inicio : AppCompatActivity() {
 
     private fun actualizarUI() {
         if (SesionUsuario.isLoggedIn) {
-            tvBienvenida.text = "Bienvenido, ${SesionUsuario.username}!"
+            tvBienvenida.text = "Bienvenido al ajedrez, ${SesionUsuario.username}!"
             btnSesion.text = "Cerrar Sesión"
             btnJugar.isEnabled = true
         } else {
-            tvBienvenida.text = "Bienvenido !"
+            tvBienvenida.text = "¡Bienvenido al ajedrez!"
             btnSesion.text = "Iniciar Sesión"
             btnJugar.isEnabled = false
         }

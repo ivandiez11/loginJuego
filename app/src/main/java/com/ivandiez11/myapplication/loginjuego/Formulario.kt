@@ -15,7 +15,6 @@ import java.util.Calendar
 
 class Formulario : AppCompatActivity() {
 
-    // Referencias a los elementos visuales
     private lateinit var etNombreUsuario: TextInputEditText
     private lateinit var etCorreo: TextInputEditText
     private lateinit var etContrasena: TextInputEditText
@@ -23,24 +22,22 @@ class Formulario : AppCompatActivity() {
     private lateinit var spinnerTipoJuego: Spinner
     private lateinit var cbTerminos: CheckBox
     private lateinit var btnIniciarSesion: Button
+    private lateinit var btnVolverInicio: Button
+    private lateinit var tvErrores: TextView
 
-    // Estado de validaciones
     private var nombreValido = false
     private var emailValido = false
     private var passwordValida = false
     private var fechaValida = false
+    private var edadValida = false
     private var tipoJuegoValido = false
     private var terminosAceptados = false
-
-    // *** CORRECCIÓN: Se elimina el companion object. No es necesario. ***
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario)
 
-        // ============================
-        // 1. Inicializar vistas
-        // ============================
+        // Inicializar vistas
         etNombreUsuario = findViewById(R.id.etNombreUsuario)
         etCorreo = findViewById(R.id.etCorreo)
         etContrasena = findViewById(R.id.etContrasena)
@@ -48,37 +45,26 @@ class Formulario : AppCompatActivity() {
         spinnerTipoJuego = findViewById(R.id.spinnerTipoJuego)
         cbTerminos = findViewById(R.id.cbTerminos)
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion)
+        btnVolverInicio = findViewById(R.id.btnVolverInicio)
+        tvErrores = findViewById(R.id.tvErrores)
 
-        // ============================
-        // 2. Configurar Spinner con placeholder
-        // ============================
+        btnIniciarSesion.isEnabled = false
+        btnVolverInicio.isEnabled = true
+
+        // Spinner
         val tiposDeJuego = listOf(
-            "Selecciona...",   // placeholder
-            "Rol",
-            "Aventura",
-            "Estrategia",
-            "Acción",
-            "Simulación",
-            "Deportes",
-            "Puzzle"
+            "Selecciona...", "Rol", "Aventura", "Estrategia",
+            "Acción", "Simulación", "Deportes", "Puzzle"
         )
 
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            tiposDeJuego
-        )
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tiposDeJuego)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerTipoJuego.adapter = adapter
 
-        // ============================
-        // 3. Listeners para validación
-        // ============================
+        // TextWatcher que actualiza validación en tiempo real
         val watcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validarCampos()
-            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { validarCampos() }
             override fun afterTextChanged(s: Editable?) {}
         }
 
@@ -88,12 +74,8 @@ class Formulario : AppCompatActivity() {
         etFechaNacimiento.addTextChangedListener(watcher)
 
         spinnerTipoJuego.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                validarCampos()
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                validarCampos()
-            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) { validarCampos() }
+            override fun onNothingSelected(parent: AdapterView<*>?) { validarCampos() }
         }
 
         cbTerminos.setOnCheckedChangeListener { _, isChecked ->
@@ -101,41 +83,32 @@ class Formulario : AppCompatActivity() {
             validarCampos()
         }
 
-        btnIniciarSesion.isEnabled = false
+        etFechaNacimiento.setOnClickListener { mostrarDatePicker() }
 
-        // ============================
-        // 4. DatePicker para fecha de nacimiento
-        // ============================
-        etFechaNacimiento.setOnClickListener {
-            mostrarDatePicker()
-        }
-
-        // ============================
-        // 5. Botón Iniciar Sesión
-        // ============================
+        // Botón Iniciar Sesión
         btnIniciarSesion.setOnClickListener {
-            // *** CORRECCIÓN PRINCIPAL ***
-            // Se llama al método del singleton para actualizar sus datos.
+            // Ya no se necesita validación adicional, todo se maneja en tiempo real
             SesionUsuario.iniciarSesion(
                 nombreUsuario = etNombreUsuario.text?.toString() ?: "",
                 email = etCorreo.text?.toString() ?: "",
                 birthDate = etFechaNacimiento.text?.toString() ?: "",
                 favoriteGameType = spinnerTipoJuego.selectedItem.toString()
             )
-
-            // Navegar a Inicio
             val intent = Intent(this, Inicio::class.java)
-            // Estas flags limpian la pila de navegación para que el usuario no vuelva al formulario
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
+            finish()
+        }
 
-            finish() // Cierra esta actividad (Formulario)
+        // Botón Volver al inicio
+        btnVolverInicio.setOnClickListener {
+            val intent = Intent(this, Inicio::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
         }
     }
 
-    // ============================
-    // Función DatePicker
-    // ============================
     private fun mostrarDatePicker() {
         val calendario = Calendar.getInstance()
         val añoActual = calendario.get(Calendar.YEAR)
@@ -147,21 +120,17 @@ class Formulario : AppCompatActivity() {
             { _, year, month, dayOfMonth ->
                 val fechaFormateada = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
                 etFechaNacimiento.setText(fechaFormateada)
-                // No es necesario llamar a validarCampos() aquí, el TextWatcher ya lo hace.
+                validarCampos() // actualizar validación al elegir fecha
             },
-            añoActual,
-            mesActual,
-            diaActual
+            añoActual, mesActual, diaActual
         )
 
         datePicker.datePicker.maxDate = System.currentTimeMillis()
         datePicker.show()
     }
 
-    // ============================
-    // Validación centralizada
-    // ============================
     private fun validarCampos() {
+        // Validaciones individuales
         val nombre = etNombreUsuario.text?.toString()?.trim() ?: ""
         nombreValido = nombre.isNotEmpty()
 
@@ -174,10 +143,43 @@ class Formulario : AppCompatActivity() {
         val fecha = etFechaNacimiento.text?.toString()?.trim() ?: ""
         fechaValida = fecha.isNotEmpty()
 
-        val pos = spinnerTipoJuego.selectedItemPosition
-        tipoJuegoValido = pos > 0 // El placeholder está en la posición 0
+        // Validación de edad >= 13 años
+        edadValida = false
+        if (fechaValida) {
+            val partes = fecha.split("/")
+            if (partes.size == 3) {
+                val dia = partes[0].toIntOrNull() ?: 0
+                val mes = partes[1].toIntOrNull() ?: 0
+                val año = partes[2].toIntOrNull() ?: 0
 
-        btnIniciarSesion.isEnabled = nombreValido && emailValido && passwordValida &&
-                fechaValida && tipoJuegoValido && terminosAceptados
+                val today = Calendar.getInstance()
+                var edad = today.get(Calendar.YEAR) - año
+                if (today.get(Calendar.MONTH) + 1 < mes ||
+                    (today.get(Calendar.MONTH) + 1 == mes && today.get(Calendar.DAY_OF_MONTH) < dia)) {
+                    edad--
+                }
+                edadValida = edad >= 13
+            }
+        }
+
+        tipoJuegoValido = spinnerTipoJuego.selectedItemPosition > 0
+
+        // Botón habilitado solo si todo es válido
+        btnIniciarSesion.isEnabled =
+            nombreValido && emailValido && passwordValida &&
+                    fechaValida && edadValida && tipoJuegoValido && terminosAceptados
+
+        // Mostrar errores en tiempo real
+        val errores = mutableListOf<String>()
+        if (!nombreValido) errores.add("Nombre de usuario inválido")
+        if (!emailValido) errores.add("Correo electrónico inválido")
+        if (!passwordValida) errores.add("Contraseña inválida (mínimo 6 caracteres)")
+        if (!fechaValida) errores.add("Fecha de nacimiento inválida")
+        if (fechaValida && !edadValida) errores.add("Debes tener al menos 13 años")
+        if (!tipoJuegoValido) errores.add("Selecciona un tipo de juego")
+        if (!terminosAceptados) errores.add("Debes aceptar los términos")
+
+        tvErrores.text = errores.joinToString("\n")
+        tvErrores.visibility = if (errores.isNotEmpty()) View.VISIBLE else View.GONE
     }
 }
