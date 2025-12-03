@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp"
+    android:fillViewport="true"
     android:background="#2C2C2C">
 
     <LinearLayout
@@ -11,63 +12,62 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Campos del formulario (igual que antes) -->
         <!-- Nombre de Usuario -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre de Usuario"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.App.TextInputLayout">
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etNombreUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:inputType="textPersonName"                />
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Correo Electrónico -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.App.TextInputLayout">
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Contraseña -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
             android:layout_marginBottom="16dp"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@android:color/white"
-            style="@style/Widget.App.TextInputLayout">
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Fecha de Nacimiento -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Fecha de Nacimiento"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.App.TextInputLayout">
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etFechaNacimiento"
@@ -75,30 +75,28 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:focusable="false"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Tipo de juego favorito (Spinner necesita un tema oscuro) -->
-        <!-- Tipo de juego favorito -->
+        <!-- Spinner -->
         <Spinner
             android:id="@+id/spinnerTipoJuego"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:padding="16dp"
-            android:background="@color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            android:background="@color/white"/>
 
-
-        <!-- Aceptar términos -->
+        <!-- Checkbox -->
         <CheckBox
             android:id="@+id/cbTerminos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acepto los términos y condiciones"
             android:layout_marginBottom="24dp"
-            android:textColor="@android:color/white"
-            app:buttonTint="@android:color/white"/> <!-- Para que la casilla también sea blanca -->
+            android:textColor="@android:color/white"/>
 
         <!-- Botón Iniciar Sesión -->
         <Button
@@ -110,5 +108,28 @@
             android:textColor="#FFFFFF"
             android:enabled="false"
             android:elevation="4dp"/>
+
+        <!-- Botón Volver al inicio -->
+        <Button
+            android:id="@+id/btnVolverInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volver al inicio"
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"
+            android:enabled="true"
+            android:elevation="4dp"/>
+
+        <!-- TextView de errores -->
+        <TextView
+            android:id="@+id/tvErrores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FF5555"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"/>
     </LinearLayout>
 </ScrollView>

@@ -12,7 +12,7 @@
         android:id="@+id/tvBienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bienvenido al Ajedrez Maestro!"
+        android:text="Bienvenido!"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
