@@ -79,12 +79,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Tipo de juego favorito (Spinner necesita un tema oscuro) -->
+        <!-- Tipo de juego favorito -->
         <Spinner
             android:id="@+id/spinnerTipoJuego"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"/> <!-- Para que el texto del spinner sea visible -->
+            android:padding="16dp"
+            android:background="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
 
         <!-- Aceptar términos -->
         <CheckBox
