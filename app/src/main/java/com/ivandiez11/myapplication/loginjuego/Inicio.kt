@@ -48,7 +48,6 @@ class Inicio : AppCompatActivity() {
 
     private fun actualizarUI() {
         if (SesionUsuario.isLoggedIn) {
-            // *** CORRECCIÓN ***
             tvBienvenida.text = "Bienvenido, ${SesionUsuario.username}!"
             btnSesion.text = "Cerrar Sesión"
             btnJugar.isEnabled = true

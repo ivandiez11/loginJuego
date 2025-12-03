@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.LoginJuego" parent="Base.Theme.LoginJuego" />
+    <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <!-- Color del "hint" cuando está flotando o enfocado -->
+        <item name="hintTextColor">@color/white</item>
+        <!-- Color de la línea inferior y el borde cuando está enfocado -->
+        <item name="boxStrokeColor">@color/white</item>
+        <!-- Color del texto que escribe el usuario -->
+        <item name="android:textColorHint">#A0A0A0</item> <!-- Color del hint cuando no está enfocado -->
+    </style>
+
 </resources>

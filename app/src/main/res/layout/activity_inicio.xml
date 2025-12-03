@@ -5,38 +5,44 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="#F08080"> <!-- Fondo suave -->
+    android:background="@drawable/fondo_ajedrez_moderno"> <!-- Fondo más elegante -->
 
     <!-- Mensaje de bienvenida -->
     <TextView
         android:id="@+id/tvBienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bienvenido !"
+        android:text="Bienvenido al Ajedrez Maestro!"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_marginBottom="40dp"/>
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="40dp"
+        android:shadowColor="#80000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"/>
 
-    <!-- Botón Iniciar Sesión / Cerrar Sesión -->
+    <!-- Botón Iniciar Sesión / Registro -->
     <Button
         android:id="@+id/btnSesion"
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
-        android:backgroundTint="#FF9800"
+        android:textSize="18sp"
+        android:background="@drawable/boton_redondeado_dorado"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="20dp"
-        android:elevation="4dp"/>
+        android:elevation="6dp"/>
 
     <!-- Botón Jugar Ahora -->
     <Button
         android:id="@+id/btnJugar"
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:text="Jugar Ahora"
-        android:backgroundTint="#4CAF50"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
-        android:elevation="4dp"
-        android:enabled="false"/>
+        android:elevation="6dp"
+        android:enabled="true"/>
 </LinearLayout>
+

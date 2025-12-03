@@ -1,0 +1,5 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="#2C2C2C"/> <!-- Gris oscuro -->
+    </item>
+</layer-list>

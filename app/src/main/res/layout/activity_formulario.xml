@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="#FAFAFA">
+    android:background="#2C2C2C">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre de Usuario"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.App.TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etNombreUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:inputType="textPersonName"/>
+                android:inputType="textPersonName"                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Correo Electrónico -->
@@ -31,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.App.TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCorreo"
@@ -47,7 +49,9 @@
             android:layout_height="wrap_content"
             android:hint="Contraseña"
             android:layout_marginBottom="16dp"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@android:color/white"
+            style="@style/Widget.App.TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etContrasena"
@@ -62,7 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Fecha de Nacimiento"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.App.TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etFechaNacimiento"
@@ -73,12 +78,13 @@
                 android:clickable="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Tipo de juego favorito -->
+        <!-- Tipo de juego favorito (Spinner necesita un tema oscuro) -->
         <Spinner
             android:id="@+id/spinnerTipoJuego"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"/> <!-- Para que el texto del spinner sea visible -->
 
         <!-- Aceptar términos -->
         <CheckBox
@@ -86,7 +92,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acepto los términos y condiciones"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp"
+            android:textColor="@android:color/white"
+            app:buttonTint="@android:color/white"/> <!-- Para que la casilla también sea blanca -->
 
         <!-- Botón Iniciar Sesión -->
         <Button
